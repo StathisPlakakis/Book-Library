@@ -6,7 +6,7 @@ body, h1, h2, h3, h4, p, ul, li, tr, th, td {
 :root {
     --main-color: rgba(216, 216, 216, 0.599);
     --header-color: rgb(255, 255, 255);
-
+    --td-odd:rgba(216, 216, 216, 0.599);
 }
 
 
@@ -57,13 +57,19 @@ body, h1, h2, h3, h4, p, ul, li, tr, th, td {
 
 table {
     background-color: var(--header-color);
-    border-radius: 20px;
+    border: 1px solid;
+    width: 90vw;
+    border-collapse: collapse;
+    letter-spacing: 1px;
 }
 
-table th {
-    padding: 5px 20px;
-    border: 1px solid ;
-    border-radius: 20px;
-    margin: 20px;
+table th, table td {
+    padding: 5px 30px;
+    white-space: wrap;
+    word-wrap: break-word;
+    text-align: center;
+}
 
+tbody tr:nth-child(odd) {
+    background-color: var(--td-odd);
 }
