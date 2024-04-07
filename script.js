@@ -1,5 +1,6 @@
 const myLibrary = [];
 const addButton = document.querySelector(".add");
+const tableBody = document.querySelector("tbody");
 
 
 function Book (title, author, pages, read) {
@@ -18,10 +19,34 @@ function addBookToLibrary(title, author, pages, read) {
    myLibrary.push(newBook);
 }
 
+function arrayTraversal (array) {
+    array.forEach(element => {
+        let titleContent = element.title;
+        let authorContent = element.author;
+        let pagesContent = element.pages;
+        let readContent = element.read;
+        let tr = document.createElement("tr");
+        let td1 = document.createElement("td");
+        let td2 = document.createElement("td");
+        let td3 = document.createElement("td");
+        let td4 = document.createElement("td");
+        td1.textContent = `${titleContent}`;
+        td2.textContent = `${authorContent}`;
+        td3.textContent = `${pagesContent}`;
+        td4.textContent = `${readContent}`;
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+        tr.appendChild(td4);
+        tableBody.appendChild(tr);
+    });
+}
+
 addButton.addEventListener("click", () => {
     const title = prompt("Give me title");
     const author = prompt("Give me author");
     const pages = prompt("Give me pages");
     const read = prompt("Read (y/n)");
     addBookToLibrary(title, author, pages, read);
+    arrayTraversal(myLibrary);
 })
