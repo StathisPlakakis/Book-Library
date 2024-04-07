@@ -2,6 +2,9 @@ const myLibrary = [];
 const addButton = document.querySelector(".add");
 const tableBody = document.querySelector("tbody");
 const dialog = document.querySelector("dialog");
+const submitButton = document.querySelector("#submit");
+const cancelButton = document.querySelector("#cancel");
+
 
 
 
@@ -49,6 +52,9 @@ addButton.addEventListener("click", () => {
     dialog.showModal();
 })
 
+cancelButton.addEventListener("click", () => {
+    dialog.close();
+})
 // const title = prompt("Give me title");
 //     const author = prompt("Give me author");
 //     const pages = prompt("Give me pages");
