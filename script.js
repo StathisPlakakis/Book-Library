@@ -66,20 +66,31 @@ function render () {
         let td3 = document.createElement("td");
         td3.textContent = parseInt(book.pages);
 
-        let readStatus = document.createElement("button");
+        let readStatus = document.createElement("td");
         readStatus.textContent = (book.read) ? "Read" : "Not Read";
         readStatus.setAttribute("index", index);
         readStatus.addEventListener("click", (e) => {
             let inde = e.target.getAttribute("index");
             changeReadSta(inde);
         })
+        readStatus.addEventListener("mouseenter", () => {
+            readStatus.style.cursor = "pointer";
+        })
+        readStatus.style.backgroundColor = (book.read) ? "rgba(130, 249, 140, 0.599)" : "rgba(249, 74, 74, 0.599)";
 
-        let delButton = document.createElement("button");
+        let delButton = document.createElement("td");
         delButton.setAttribute("index", index);
         delButton.textContent = "Delete";
         delButton.addEventListener("click", (e) => {
             let ind = e.target.getAttribute("index");
             removeBook(ind);
+        })
+        delButton.addEventListener("mouseenter", () => {
+            delButton.style.cursor = "pointer";
+            delButton.style.color = "rgba(249, 74, 74, 0.599)";
+        })
+        delButton.addEventListener("mouseleave", () => {
+            delButton.style.color = "black";
         })
 
         tr.appendChild(td1);

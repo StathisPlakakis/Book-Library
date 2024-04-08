@@ -104,6 +104,10 @@ form button[type="reset"] {
     background-color: var(--negative);
 }
 
+form button:hover {
+    cursor: pointer;
+}
+
 p {
     color: var(--negative);
 }
