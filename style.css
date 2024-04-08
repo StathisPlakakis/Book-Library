@@ -97,9 +97,13 @@ form button {
     padding: 10px;
     margin-top: 50px;
     font-size: 1.3rem;
-    background-color: rgba(130, 249, 140, 0.599);
+    background-color: var(--positive);
 }
 
 form button[type="reset"] {
-    background-color: rgba(249, 74, 74, 0.599);
+    background-color: var(--negative);
+}
+
+p {
+    color: var(--negative);
 }

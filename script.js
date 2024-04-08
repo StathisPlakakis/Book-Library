@@ -8,6 +8,8 @@ const cancelButton = document.querySelector("#cancel");
 
 
 
+
+
 function Book (title, author, pages, read) {
     this.title = title;
     this.author = author;
@@ -22,30 +24,17 @@ function Book (title, author, pages, read) {
 function addBookToLibrary(title, author, pages, read) {
    let newBook = new Book(title, author, pages, read);
    myLibrary.push(newBook);
-   console.log(newBook);
 }
 
-function arrayTraversal (array) {
-    array.forEach(element => {
-        let titleContent = element.title;
-        let authorContent = element.author;
-        let pagesContent = element.pages;
-        let readContent = element.read;
-        let tr = document.createElement("tr");
-        let td1 = document.createElement("td");
-        let td2 = document.createElement("td");
-        let td3 = document.createElement("td");
-        let td4 = document.createElement("td");
-        td1.textContent = `${titleContent}`;
-        td2.textContent = `${authorContent}`;
-        td3.textContent = `${pagesContent}`;
-        td4.textContent = `${readContent}`;
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-        tr.appendChild(td3);
-        tr.appendChild(td4);
-        tableBody.appendChild(tr);
-    });
+
+function checkArray(titl, autho) {
+    for (let i = 0; i < myLibrary.length; ++i) {
+        if (myLibrary[i].title === titl && myLibrary[i].author === autho) {
+            return true;
+        } 
+    }
+    return false;
+
 }
 
 addButton.addEventListener("click", () => {
@@ -55,9 +44,30 @@ addButton.addEventListener("click", () => {
 cancelButton.addEventListener("click", () => {
     dialog.close();
 })
-// const title = prompt("Give me title");
-//     const author = prompt("Give me author");
-//     const pages = prompt("Give me pages");
-//     const read = prompt("Read (y/n)");
-//     addBookToLibrary(title, author, pages, read);
-//     arrayTraversal(myLibrary);
+
+submitButton.addEventListener("click", (e) => {
+    let bookTitle = document.querySelector("#title");
+    let bookAuthor = document.querySelector("#author");
+    let bookPages = document.querySelector("#pages");
+    let bookRead = document.querySelector("#read");
+
+    
+
+    if (bookAuthor.value.length !== 0 && bookTitle.value.length !== 0 && parseInt(bookPages.value) >= 1) {
+
+        e.preventDefault()
+        document.querySelector("#error").textContent = (checkArray(bookTitle.value, bookAuthor.value)) ? "This Book exists!" : "";
+
+        if (document.querySelector("#error").textContent === "") {
+            let title = bookTitle.value;
+            let author = bookAuthor.value;
+            let pages = parseInt(bookPages.value);
+            let read = bookRead.checked;
+            addBookToLibrary(title, author, pages, read);
+            console.log(title, author);
+            document.querySelector("form").reset();
+            dialog.close();
+        }
+        
+    }
+})
