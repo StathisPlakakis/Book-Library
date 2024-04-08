@@ -57,6 +57,9 @@ function render () {
     myLibrary.forEach((book, index) => {
         let tr = document.createElement("tr");
 
+        let td0 = document.createElement("td");
+        td0.textContent = `${parseInt(index + 1)})`;
+
         let td1 = document.createElement("td");
         td1.textContent = book.title;
 
@@ -93,6 +96,7 @@ function render () {
             delButton.style.color = "black";
         })
 
+        tr.appendChild(td0);
         tr.appendChild(td1);
         tr.appendChild(td2);
         tr.appendChild(td3);
