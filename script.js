@@ -37,6 +37,11 @@ function checkArray(titl, autho) {
 
 }
 
+function removeBook (index) {
+    myLibrary.splice(index, 1);
+    render();
+}
+
 function render () {
     const tbody = document.querySelector("tbody");
     tbody.innerHTML = "";
@@ -54,6 +59,14 @@ function render () {
         tr.appendChild(td2);
         tr.appendChild(td3);
         tr.appendChild(td4);
+        let delButton = document.createElement("button");
+        delButton.setAttribute("index", index);
+        delButton.textContent = "Delete";
+        delButton.addEventListener("click", (e) => {
+            let ind = e.target.getAttribute("index");
+            removeBook(ind);
+        })
+        tr.appendChild(delButton);
         tbody.appendChild(tr);
     })
 }
