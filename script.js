@@ -37,6 +37,27 @@ function checkArray(titl, autho) {
 
 }
 
+function render () {
+    const tbody = document.querySelector("tbody");
+    tbody.innerHTML = "";
+    myLibrary.forEach((book, index) => {
+        let tr = document.createElement("tr");
+        let td1 = document.createElement("td");
+        td1.textContent = book.title;
+        let td2 = document.createElement("td");
+        td2.textContent = book.author;
+        let td3 = document.createElement("td");
+        td3.textContent = parseInt(book.pages);
+        let td4 = document.createElement("td");
+        td4.textContent = book.read;
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+        tr.appendChild(td4);
+        tbody.appendChild(tr);
+    })
+}
+
 addButton.addEventListener("click", () => {
     dialog.showModal();
 })
@@ -64,9 +85,9 @@ submitButton.addEventListener("click", (e) => {
             let pages = parseInt(bookPages.value);
             let read = bookRead.checked;
             addBookToLibrary(title, author, pages, read);
-            console.log(title, author);
             document.querySelector("form").reset();
             dialog.close();
+            render();
         }
         
     }
