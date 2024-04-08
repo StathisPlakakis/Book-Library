@@ -21,6 +21,10 @@ function Book (title, author, pages, read) {
     }
 }
 
+Book.prototype.changeReadStatus = function () {
+    this.read = !this.read;
+}
+
 function addBookToLibrary(title, author, pages, read) {
    let newBook = new Book(title, author, pages, read);
    myLibrary.push(newBook);
@@ -42,23 +46,34 @@ function removeBook (index) {
     render();
 }
 
+function changeReadSta(index) {
+    myLibrary[index].changeReadStatus();
+    render();
+}
+
 function render () {
     const tbody = document.querySelector("tbody");
     tbody.innerHTML = "";
     myLibrary.forEach((book, index) => {
         let tr = document.createElement("tr");
+
         let td1 = document.createElement("td");
         td1.textContent = book.title;
+
         let td2 = document.createElement("td");
         td2.textContent = book.author;
+
         let td3 = document.createElement("td");
         td3.textContent = parseInt(book.pages);
-        let td4 = document.createElement("td");
-        td4.textContent = book.read;
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-        tr.appendChild(td3);
-        tr.appendChild(td4);
+
+        let readStatus = document.createElement("button");
+        readStatus.textContent = (book.read) ? "Read" : "Not Read";
+        readStatus.setAttribute("index", index);
+        readStatus.addEventListener("click", (e) => {
+            let inde = e.target.getAttribute("index");
+            changeReadSta(inde);
+        })
+
         let delButton = document.createElement("button");
         delButton.setAttribute("index", index);
         delButton.textContent = "Delete";
@@ -66,6 +81,11 @@ function render () {
             let ind = e.target.getAttribute("index");
             removeBook(ind);
         })
+
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+        tr.appendChild(readStatus);
         tr.appendChild(delButton);
         tbody.appendChild(tr);
     })
