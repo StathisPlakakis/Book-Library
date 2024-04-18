@@ -6,20 +6,21 @@ const submitButton = document.querySelector("#submit");
 const cancelButton = document.querySelector("#cancel");
 
 
+class Book {
+    constructor (title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
 
-
-
-
-function Book (title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.info = function () {
+    info() {
         let output = `The ${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
         return output;
     }
 }
+
+
 
 Book.prototype.changeReadStatus = function () {
     this.read = !this.read;
